@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGPA Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url("yn.jpg");
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input {
+    width: 50px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  #result {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>SGPA Calculator</h2>
+  <div>
+    <label for="subject1">Subject 1 (4 credits):</label>
+    <input type="number" id="subject1" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject2">Subject 2 (4 credits):</label>
+    <input type="number" id="subject2" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject3">Subject 3 (3 credits):</label>
+    <input type="number" id="subject3" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject4">Subject 4 (3 credits):</label>
+    <input type="number" id="subject4" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject5">Subject 5 (3 credits):</label>
+    <input type="number" id="subject5" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject6">Subject 6 (1 credit):</label>
+    <input type="number" id="subject6" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject7">Subject 7 (1 credit):</label>
+    <input type="number" id="subject7" min="0" max="100">
+  </div>
+  <div>
+    <label for="subject8">Subject 8 (1 credit):</label>
+    <input type="number" id="subject8" min="0" max="100">
+  </div>
+  <button onclick="calculateSGPA()">Calculate SGPA</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function calculateSGPA() {
+  const marks = [
+    parseFloat(document.getElementById('subject1').value),
+    parseFloat(document.getElementById('subject2').value),
+    parseFloat(document.getElementById('subject3').value),
+    parseFloat(document.getElementById('subject4').value),
+    parseFloat(document.getElementById('subject5').value),
+    parseFloat(document.getElementById('subject6').value),
+    parseFloat(document.getElementById('subject7').value),
+    parseFloat(document.getElementById('subject8').value)
+  ];
+
+  const credits = [4, 4, 3, 3, 3, 1, 1, 1];
+
+  let totalCredits = 0;
+  let totalGrade = 0;
+
+  for (let i = 0; i < marks.length; i++) {
+    const mark = marks[i];
+    const credit = credits[i];
+
+    if (mark >= 90) {
+      totalGrade += 1.0 * credit;
+    } else if (mark >= 80) {
+      totalGrade += 0.9 * credit;
+    } else if (mark >= 70) {
+      totalGrade += 0.8 * credit;
+    } else if (mark >= 60) {
+      totalGrade += 0.7 * credit;
+    } else if (mark >= 50) {
+      totalGrade += 0.6 * credit;
+    } else if (mark >= 40) {
+      totalGrade += 0.5 * credit;
+    }
+
+    totalCredits += credit;
+  }
+
+  const sgpa = totalGrade / totalCredits;
+  const resultElement = document.getElementById('result');
+  resultElement.innerHTML = `Your SGPA is: ${sgpa.toFixed(2)}`;
+}
+</script>
+</body>
+</html>
